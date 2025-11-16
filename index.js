@@ -258,9 +258,24 @@ const slashCommands = [
         name: 'add',
         description: 'Mute a user (via Muted role)',
         options: [
-          { type: 6, name: 'user', description: 'User to mute', required: true },
-          { type: 3, name: 'duration', description: 'Duration (e.g. 10m, 1h, 1d)', required: true },
-          { type: 3, name: 'reason', description: 'Reason for mute', required: true },
+          {
+            type: 6, // USER
+            name: 'user',
+            description: 'User to mute',
+            required: true,
+          },
+          {
+            type: 3, // STRING
+            name: 'duration',
+            description: 'Duration (e.g. 10m, 1h, 1d)',
+            required: true,
+          },
+          {
+            type: 3, // STRING
+            name: 'reason',
+            description: 'Reason for mute',
+            required: true,
+          },
         ],
       },
       {
@@ -268,9 +283,18 @@ const slashCommands = [
         name: 'remove',
         description: 'Unmute a user (remove Muted role)',
         options: [
-          { type: 6, name: 'user', description: 'User to unmute', required: true },
-          { type: 3, name: 'reason', description: 'Reason for unmuting', required: true },
-          { type: 3, name: 'originalreason', description: 'Reason for original mute', required: true },
+          {
+            type: 6, // USER
+            name: 'user',
+            description: 'User to unmute',
+            required: true,
+          },
+          {
+            type: 3, // STRING
+            name: 'reason',
+            description: 'Reason for unmuting',
+            required: true,
+          },
         ],
       },
     ],
