@@ -508,16 +508,24 @@ client.on('interactionCreate', async (interaction) => {
     await handler.execute(interaction, ctx);
   } catch (err) {
     console.error(`Error running command "${commandName}":`, err);
-    if (interaction.deferred || interaction.replied) {
-      return interaction.followUp({
-        content: 'There was an error while executing this command.',
-        ephemeral: true,
-      });
-    } else {
-      return interaction.reply({
-        content: 'There was an error while executing this command.',
-        ephemeral: true,
-      });
+
+    // Safe error reply – don't crash if already acknowledged
+    try {
+      if (interaction.deferred || interaction.replied) {
+        await interaction.followUp({
+          content: 'There was an error while executing this command.',
+          ephemeral: true,
+        });
+      } else {
+        await interaction.reply({
+          content: 'There was an error while executing this command.',
+          ephemeral: true,
+        });
+      }
+    } catch (err2) {
+      if (err2.code !== 40060) {
+        console.error('Failed to send error response:', err2);
+      }
     }
   }
 });
